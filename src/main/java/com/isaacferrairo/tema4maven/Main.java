@@ -1,5 +1,8 @@
 package com.isaacferrairo.tema4maven;
+
 import com.github.lalyos.jfiglet.FigletFont;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -9,11 +12,10 @@ public class Main {
         //DEFINIMOS VARIABLES
         String texto = "Isaac Ferrairo";
         String banner = FigletFont.convertOneLine(texto);
-        List<String> infoTotal=new ArrayList<>();
+        List<String> infoTotal = new ArrayList<>();
+        Screen screen = new DefaultTerminalFactory().createScreen();
 
-
-
-        for(String info : banner.split("\n")){
+        for (String info : banner.split("\n")) {
             infoTotal.add(info);
         }
 
@@ -29,6 +31,11 @@ public class Main {
         infoTotal.add("PERFIL PROFESIONAL: Estudiante de DAW");
         infoTotal.forEach(System.out::println);
 
-        }
+        screen.startScreen();
+        screen.setCursorPosition(null);
+
     }
+
+
+}
 
