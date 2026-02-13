@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -17,6 +19,8 @@ public class Main {
         String banner = FigletFont.convertOneLine(texto);
         List<String> infoTotal = new ArrayList<>();
         Screen screen = new DefaultTerminalFactory().createScreen();
+        int yOffset = screen.getTerminalSize().getRows();
+
 
         for (String info : banner.split("\n")) {
             infoTotal.add(info);
@@ -32,13 +36,24 @@ public class Main {
         infoTotal.add("LENGUAJES: JAVASCRIPT, HTML, CSS, JAVA");
         infoTotal.add("EDAD: 18 AÑOS");
         infoTotal.add("PERFIL PROFESIONAL: Estudiante de DAW");
-        infoTotal.forEach(System.out::println);
+
 
         screen.startScreen();
         screen.setCursorPosition(null);
 
+        while (yOffset > -infoTotal.size()) {
+            drawFrame(screen, infoTotal, yOffset);
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {}
+
+            yOffset--;
+        }
+
 
     }
+
 
     private static void drawFrame(Screen screen, List<String> lines, int yOffset)
             throws IOException {
